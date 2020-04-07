@@ -2,6 +2,12 @@
   "name": "to-do-list-ionic",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@capacitor/core": "2.0.0",
     "@ionic/react": "^5.0.7",
@@ -22,12 +28,6 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "typescript": "3.7.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
