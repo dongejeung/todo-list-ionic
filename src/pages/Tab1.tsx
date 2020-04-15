@@ -16,7 +16,10 @@ import React, { useState } from "react";
 import "./Tab1.css";
 
 const saved = localStorage.getItem('savedList') ?? '';
+console.log(saved);
 const savedList = JSON.parse(saved);
+console.log("JSON.parse(saved) = savedList" + "\n\n");
+console.log(savedList);
 
 const Tab1: React.FC = () => {
   // react-hook
@@ -28,7 +31,7 @@ const Tab1: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>To-do-list@@!!22</IonTitle>
+          <IonTitle>To-do-list test case!</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
@@ -36,26 +39,25 @@ const Tab1: React.FC = () => {
         {list.map((v : string, i: number) => (
           <IonCard key={i}>
             <IonCardHeader>
-              <IonCardSubtitle>{v}</IonCardSubtitle>
-              <IonCardTitle>Card Title2</IonCardTitle>
+              <IonCardSubtitle>{i} 번 카드</IonCardSubtitle>
+              <IonCardTitle>{v}</IonCardTitle>
             </IonCardHeader>
 
             <IonCardContent>
-              Keep close to Nature's heart... and break clear away, once in
-              awhile, and climb a mountain or spend a week in the woods. Wash
-              your spirit clean.
+              sample content
             </IonCardContent>
           </IonCard>
         ))}
         <IonInput
           placeholder="Enter Input"
           onIonChange={e => setContent(e.detail.value!)}
-        ></IonInput> c
+        ></IonInput>
         <IonButton onClick={()=>{ 
           const newList = [content, ...list]
+          console.log(newList);
           setList(newList)
           localStorage.setItem('savedList', JSON.stringify(newList));
-        }}>123</IonButton>
+        }}>추가</IonButton>
       </IonContent>
     </IonPage>
   );
