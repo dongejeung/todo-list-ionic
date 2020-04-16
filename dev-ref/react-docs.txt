@@ -86,6 +86,8 @@ console.log(ff(...[1, 2, 3]))
 기존에 읽었던 노란색 JS 책을 생각해보면 어차피 매개변수는 arguments 로 배열로 관리됬다고 했던 것 같기도 한데..
 그냥 편의상 만든 문법인 듯.
 
+//=> 저녁 복습 중. ...을 빼니까 1,2,3undefinedundefined 라고 나옴. 
+
 ---
 
 8. Fetch / Promise / Async-await
@@ -116,6 +118,8 @@ console.log(first, second); // dog cat
 array에 3개의 값을 할당한 상수 선언(배열에 상수선언이라 ref가 상수로 지정. 이렇게 쓰는 이유가 있겠지.)
 [first, second] 에 array의 배열의 값을 순서대로 할당해줌. 크기가 동일하지 않아도 됨.
 좌측 배열의 크기가 크면 undefined 우측이 크면, 할당하고 array에 넘치는 부분은 무시.
+
+//=> 복습 중 생각.  이게 const라 그런가 원래 값이 하나하나 들어가지 않고 레퍼런스만 바뀌던가 뭐 그런 느낌이었던 것도 같은데..
 
 ---
 ex2)
@@ -197,6 +201,11 @@ e라는 형태는 event 같은 느낌일 것 같은데 기존의 ()로 매개변
 e.target.value => 해당 이벤트 혹은 code문장 이라기보다는 어차피 대개는 배열을 의미할텐데..
 여튼 여기서 사용례를 보면 name, nickname이 target과 매칭이 되고,
 name 이나 nickname 등의 key값을 통해 value를 불러오는 것 같다.
+
+//=> 복습 중 생각. 아마 e는 예약어로 쓰였는데 이게 document와 비슷한 역할을 하는 느낌이랄까, 
+ 그렇고 target.value는 오브젝트 형태로 key : value 형태로 맵핑되어 있는 것과 유사한 구조로 추정됨.
+ let a = {a : "adsf", b : "2sdfadf"}
+ 뭐 이런 느낌이랄까..
 
 =======
 
