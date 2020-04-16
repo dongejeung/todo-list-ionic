@@ -1,17 +1,4 @@
-import {
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
-  IonCardContent,
-  IonButton
-} from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar, IonItem } from "@ionic/react";
 import React, { useState } from "react";
 import "./Tab1.css";
 
@@ -24,6 +11,8 @@ console.log(savedList);
 const Tab1: React.FC = () => {
   // react-hook
 
+  // dummy case
+  // localStorage.setItem('savedList', JSON.stringify(["sample"]));
   const [content, setContent] = useState("");
   const [list, setList] = useState(savedList);
   
@@ -34,6 +23,7 @@ const Tab1: React.FC = () => {
           <IonTitle>To-do-list test case!</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent>
         {content}
         {list.map((v : string, i: number) => (
@@ -45,6 +35,16 @@ const Tab1: React.FC = () => {
 
             <IonCardContent>
               sample content
+              <IonItem>
+                <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
+                  console.log(list);
+                  list.splice(i, 1);
+                  const newList = [content, list]
+                  setList(newList)
+                  localStorage.setItem('savedList', JSON.stringify(newList));
+                }}>
+                 Del</IonButton>
+              </IonItem>
             </IonCardContent>
           </IonCard>
         ))}
