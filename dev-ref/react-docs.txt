@@ -214,5 +214,8 @@ name 이나 nickname 등의 key값을 통해 value를 불러오는 것 같다.
 
 =======
 
+typeScript 도 봐야함..
+
+
 
 
