@@ -74,6 +74,8 @@ console.log(f(3, 'hello', true))
 그냥 정의를 써놓으면 편할수도 있을 것 같은데.. 
 다음 예시를 보면 배열로 사용한 예제가 나옴.
 
+//=> 준호왈 : ...y는 
+
 ex3)
 function ff(x, y, z) {
     return x + y + z

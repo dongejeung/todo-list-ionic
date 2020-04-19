@@ -15,7 +15,7 @@ const Tab1: React.FC = () => {
 
   // dummy case
   // localStorage.setItem('savedList', JSON.stringify(["sample"]));
-  // localStorage.setItem('savedList', JSON.stringify([{title: "에비", content: "에비비"}]));
+  // localStorage.setItem('savedList', JSON.stringify([{title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}]));
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(savedList);
@@ -40,7 +40,11 @@ const Tab1: React.FC = () => {
               {v.content}
               <IonItem>
               <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
-                const newList = [{title, content}, ...list].splice(i, 1)
+                // {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}
+                // const newList = [...list]
+                // newList.splice(i, 1)
+                // console.log(newList)
+                const newList = list.filter((v, ii)=> ii !== i)
                 setList(newList)
                 localStorage.setItem('savedList', JSON.stringify(newList));
                 }}>Del</IonButton>
