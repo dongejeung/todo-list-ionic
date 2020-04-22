@@ -1,68 +1,56 @@
-//import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import React from 'react';
-import './Tab2.css';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonItem, IonIcon, IonLabel, IonButton } from '@ionic/react';
-import { pin, wifi, wine, warning, walk } from 'ionicons/icons';
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
+  IonCardTitle, IonContent, IonHeader, IonInput, IonItem, IonPage, IonTitle,
+   IonToolbar,IonLabel, IonCheckbox } from "@ionic/react";
+import React, { useState } from "react";
+import "./Tab1.css";
 
+const saved = localStorage.getItem('savedList') ?? '';
+const savedList = JSON.parse(saved);
 
-const Tab2: React.FC = () => {
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>CardExamples</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-            <IonCardTitle>Card Title</IonCardTitle>
-          </IonCardHeader>
+interface TodoItem {
+ title: string;
+ content: string;
+ checked: boolean;
+}
 
-          <IonCardContent>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </IonCardContent>
-        </IonCard>
+const Tab1: React.FC = () => {
+ // react-hook
 
-        <IonCard>
-          <IonItem>
-            <IonIcon icon={pin} slot="start" />
-            <IonLabel>ion-item in a card, icon left, button right</IonLabel>
-            <IonButton fill="outline" slot="end">View</IonButton>
-          </IonItem>
+ // dummy case
+ // localStorage.setItem('savedList', JSON.stringify(["sample"]));
+ // localStorage.setItem('savedList', JSON.stringify([{title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}]));
+ //const [title, setTitle] = useState<string>("");
+ //const [content, setContent] = useState<string>("");
+ const [list, setList] = useState<TodoItem[]>(savedList);
+ //const [checked, setChecked] = useState(false);
+ const newlist = list;
+ //const newlist = list.filter((v, ii) => ii !== 1);
+ //console.log(list.filter((v, ii) => ii !== 1));
 
-          <IonCardContent>
-            This is content, without any paragraph or header tags,
-            within an ion-cardContent element.
-      </IonCardContent>
-        </IonCard>
+ return (
+   <IonPage>
+     <IonHeader>
+       <IonToolbar>
+         <IonTitle>To-do-list test case!</IonTitle>
+       </IonToolbar>
+     </IonHeader>
 
-        <IonCard>
-          <IonItem href="#" className="ion-activated">
-            <IonIcon icon={wifi} slot="start" />
-            <IonLabel>Card Link Item 1 activated</IonLabel>
-          </IonItem>
-
-          <IonItem href="#">
-            <IonIcon icon={wine} slot="start" />
-            <IonLabel>Card Link Item 2</IonLabel>
-          </IonItem>
-
-          <IonItem className="ion-activated">
-            <IonIcon icon={warning} slot="start" />
-            <IonLabel>Card Button Item 1 activated</IonLabel>
-          </IonItem>
-
-          <IonItem>
-            <IonIcon icon={walk} slot="start" />
-            <IonLabel>Card Button Item 2</IonLabel>
-          </IonItem>
-        </IonCard>
-      </IonContent>
-    </IonPage>
-  );
+     <IonContent>
+       {newlist.map((v : TodoItem, i: number) => (
+         <IonCard key={i}>
+           <IonCardHeader>
+             <IonCardTitle>{v.title}</IonCardTitle>
+           </IonCardHeader>
+           
+           <IonCardContent>
+             {v.content}
+           </IonCardContent>
+         </IonCard>
+       ))}
+       
+     </IonContent>
+   </IonPage>
+ );
 };
 
-export default Tab2;
+export default Tab1;

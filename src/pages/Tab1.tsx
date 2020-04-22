@@ -1,13 +1,14 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonHeader, IonInput, IonItem, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCheckbox, IonContent, IonHeader, IonInput, IonItem, IonPage, IonTitle, IonToolbar, IonTextarea, IonLabel } from "@ionic/react";
 import React, { useState } from "react";
 import "./Tab1.css";
 
 const saved = localStorage.getItem('savedList') ?? '';
 const savedList = JSON.parse(saved);
-
 interface TodoItem {
+  cardNum: number;
   title: string;
   content: string;
+  checked: boolean;
 }
 
 const Tab1: React.FC = () => {
@@ -15,10 +16,12 @@ const Tab1: React.FC = () => {
 
   // dummy case
   // localStorage.setItem('savedList', JSON.stringify(["sample"]));
-  // localStorage.setItem('savedList', JSON.stringify([{title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}]));
+  // localStorage.setItem('savedList', JSON.stringify([{cardNum: 0, title: "에비", content: "에비비"}]));
+  const [cardNum, setCardNum] = useState<number>(savedList.length);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(savedList);
+  const [checked, setChecked] = useState(false);
   
   return (
     <IonPage>
@@ -32,37 +35,51 @@ const Tab1: React.FC = () => {
         {list.map((v : TodoItem, i: number) => (
           <IonCard key={i}>
             <IonCardHeader>
-              <IonCardSubtitle>{i} 번 카드</IonCardSubtitle>
-              <IonCardTitle>{v.title}</IonCardTitle>
-            </IonCardHeader>
-
-            <IonCardContent>
-              {v.content}
+              {/* <IonCardSubtitle>{i} 번 카드</IonCardSubtitle> */}
               <IonItem>
-              <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
-                // {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}
-                // const newList = [...list]
-                // newList.splice(i, 1)
-                // console.log(newList)
-                const newList = list.filter((v, ii)=> ii !== i)
-                setList(newList)
-                localStorage.setItem('savedList', JSON.stringify(newList));
-                }}>Del</IonButton>
+                <IonCheckbox checked={checked} 
+                onIonChange={e => {
+                  setChecked(e.detail.checked)
+                  //console.log(v.cardNum)
+                  //const newList = list
+                  const newList = list.map(item => item.cardNum === v.cardNum
+                    ? ({ ...item, checked: e.detail.checked }) 
+                    : item)
+                    console.log(newList)
+
+                  setList(newList)
+                  localStorage.setItem('savedList', JSON.stringify(newList))
+                  
+                }} />
+                <IonCardTitle>{v.title}</IonCardTitle>
+                <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
+                  const newList = list.filter((v, ii)=> ii !== i)
+                  setList(newList)
+                  localStorage.setItem('savedList', JSON.stringify(newList));
+                  }}>Del</IonButton>
               </IonItem>
-            </IonCardContent>
+              <IonCardContent>
+                {v.content}
+              </IonCardContent>
+            </IonCardHeader>
+            
           </IonCard>
         ))}
-        
+        <IonLabel>Type Title</IonLabel>
         <IonInput
           placeholder="Enter title"
           onIonChange={e => setTitle(e.detail.value!)}
         ></IonInput>
-        <IonInput
+        <IonLabel>Type content</IonLabel>
+        <IonTextarea
           placeholder="Enter content"
           onIonChange={e => setContent(e.detail.value!)}
-        ></IonInput>
+        ></IonTextarea>
         <IonButton onClick={()=>{ 
-          const newList = [{title, content}, ...list]
+          //console.log(list.length+1)
+          setCardNum(list.length)
+          const newList = [{cardNum, title, content, checked}, ...list]
+          console.log(newList)
           setList(newList)
           localStorage.setItem('savedList', JSON.stringify(newList));
         }}>추가</IonButton>
