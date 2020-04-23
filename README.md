@@ -209,41 +209,54 @@ const newList = list.map(item => item.cardNum === v.cardNum
 
 -----
 할일 
-1. cardNum에 unique 값 부여하기.
-=> 배열의 cardNum중에서 최대값을 찾아서 거기서 1증가한 값을 cardNum에 
-삽입하는 수식을 생각함.
-
-2. newList에는 checked 값이 true, false 로 의도한대로 바뀌나,
+1. newList에는 checked 값이 true, false 로 의도한대로 바뀌나,
 setChecked(e.detail.checked)
 을 사용할 경우, 둘 다 체크상태로 보여지고,
 해당 문장을 해제할 경우,
 둘다 체크해제 상태로 보이게 된다.
 
+2. cardNum에 unique 값 부여하기.
+=> 배열의 cardNum중에서 최대값을 찾아서 거기서 1증가한 값을 cardNum에 
+삽입하는 수식을 생각함.
 
 
+2020/04/23
+
+아 체크가 사리지는 이유를 대충 추론했다.
+아 헷갈리는데..
+그냥 저장 버튼을 만들까.
+아까 배열 콘솔로그가 포문 돌기도 한것 같은데..
+setChecked 사용시
+루프 돌아서 들어가네..
+사용 안해도 루프가 돌아가는 구나..
+
+setChecked 는 사용 안하는게 맞는 것 같고..
+이게 왜 두바퀴씩 돌아가지?
+클릭을 하면 값이 바뀌었다가.
+다시 바뀌네..
+아 카드넘 중복때매 그런가..
+아닌데.. 하나만 있어도 그러네..
+
+아 해결했다. 
+이게 복붙의 폐해다.
+checked={checked} 
+태그 안에 이게 있어서 그런가 보다.
+대입이 두번 일어나서 그런 듯.
+---
+됐다. 체크가 연속으로 안일어나고,
+새고고침해도 체크가 남아있다.
+const [checked, setChecked] = useState<boolean>(false);
+<IonCheckbox checked={v.checked}
 
 
+---
 
+unique 값 부여는 후순위로 미루고,
+tab3에 체크된 리스트만 표시하는 것을 먼저 해보자.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+됐다.
+tab3 상단에
+const newlist = list.filter((v, ii) => v.checked === true);
+하고 카드 그려줄때 newList.map 으로 그려줬다.
+---
+자동 렌더링은 새로고침 해줘야 된다.

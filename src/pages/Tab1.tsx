@@ -14,20 +14,17 @@ interface TodoItem {
 const Tab1: React.FC = () => {
   // react-hook
 
-  // dummy case
-  // localStorage.setItem('savedList', JSON.stringify(["sample"]));
-  // localStorage.setItem('savedList', JSON.stringify([{cardNum: 0, title: "에비", content: "에비비"}]));
   const [cardNum, setCardNum] = useState<number>(savedList.length);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(savedList);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
   
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>To-do-list test case!</IonTitle>
+          <IonTitle>To-do-list</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -35,21 +32,14 @@ const Tab1: React.FC = () => {
         {list.map((v : TodoItem, i: number) => (
           <IonCard key={i}>
             <IonCardHeader>
-              {/* <IonCardSubtitle>{i} 번 카드</IonCardSubtitle> */}
               <IonItem>
-                <IonCheckbox checked={checked} 
-                onIonChange={e => {
-                  setChecked(e.detail.checked)
-                  //console.log(v.cardNum)
-                  //const newList = list
+                <IonCheckbox checked={v.checked}
+                onIonChange={e => { 
                   const newList = list.map(item => item.cardNum === v.cardNum
                     ? ({ ...item, checked: e.detail.checked }) 
                     : item)
-                    console.log(newList)
-
                   setList(newList)
                   localStorage.setItem('savedList', JSON.stringify(newList))
-                  
                 }} />
                 <IonCardTitle>{v.title}</IonCardTitle>
                 <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
@@ -76,10 +66,8 @@ const Tab1: React.FC = () => {
           onIonChange={e => setContent(e.detail.value!)}
         ></IonTextarea>
         <IonButton onClick={()=>{ 
-          //console.log(list.length+1)
           setCardNum(list.length)
           const newList = [{cardNum, title, content, checked}, ...list]
-          console.log(newList)
           setList(newList)
           localStorage.setItem('savedList', JSON.stringify(newList));
         }}>추가</IonButton>

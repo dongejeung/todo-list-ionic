@@ -16,22 +16,14 @@ interface TodoItem {
 const Tab1: React.FC = () => {
  // react-hook
 
- // dummy case
- // localStorage.setItem('savedList', JSON.stringify(["sample"]));
- // localStorage.setItem('savedList', JSON.stringify([{title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}, {title: "에비", content: "에비비"}]));
- //const [title, setTitle] = useState<string>("");
- //const [content, setContent] = useState<string>("");
  const [list, setList] = useState<TodoItem[]>(savedList);
- //const [checked, setChecked] = useState(false);
- const newlist = list;
- //const newlist = list.filter((v, ii) => ii !== 1);
- //console.log(list.filter((v, ii) => ii !== 1));
+ const newlist = list.filter((v, ii) => v.checked === true);
 
  return (
    <IonPage>
      <IonHeader>
        <IonToolbar>
-         <IonTitle>To-do-list test case!</IonTitle>
+         <IonTitle>To-do-list Completed</IonTitle>
        </IonToolbar>
      </IonHeader>
 
