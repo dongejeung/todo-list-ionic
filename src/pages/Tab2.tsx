@@ -1,12 +1,11 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
-  IonCardTitle, IonContent, IonHeader, IonInput, IonItem, IonPage, IonTitle,
-   IonToolbar,IonLabel, IonCheckbox } from "@ionic/react";
+import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import React, { useState } from "react";
 import "./Tab1.css";
 
-const saved = localStorage.getItem('savedList') ?? '';
+const saved = localStorage.getItem('savedList') ?? JSON.stringify([]);
+console.log(saved)
 const savedList = JSON.parse(saved);
-
+ 
 interface TodoItem {
  title: string;
  content: string;
