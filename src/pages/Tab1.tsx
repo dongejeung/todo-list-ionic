@@ -1,5 +1,5 @@
-import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCheckbox, IonContent, IonHeader, IonInput, IonItem, IonPage, IonTitle, IonToolbar, IonTextarea, IonLabel } from "@ionic/react";
-import React, { useState, useEffect } from "react";
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCheckbox, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTextarea, IonTitle, IonToolbar, IonSearchbar } from "@ionic/react";
+import React, { useEffect, useState } from "react";
 import "./Tab1.css";
 
 const saved = localStorage.getItem('savedList') ?? JSON.stringify([]);
@@ -9,6 +9,7 @@ interface TodoItem {
   title: string;
   content: string;
   checked: boolean;
+  isSearched: boolean;
 }
 
 const Tab1: React.FC = () => {
@@ -19,29 +20,44 @@ const Tab1: React.FC = () => {
   const [content, setContent] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(savedList);
   const [checked, setChecked] = useState<boolean>(false);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    console.log('useEffect')
-    console.log(list)
-  }, [JSON.stringify(list)])
 
+  }, [JSON.stringify(list)])
+  const initList = list.filter((v, ii) => v.isSearched === true )
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>To-do-list</IonTitle>
+          <IonSearchbar value={searchText} onIonChange={e => {
+            // typescript 예상 인자가 undefined가 있을 수 있어서 그런 듯.
+            let isSearched: string = ""
+            if(e.detail.value !== undefined){
+              isSearched = e.detail.value;
+            }
+            setSearchText(e.detail.value!)
+            //const newList = list.filter((v, ii) => v.title.indexOf(isSearched) !== -1)
+            const newList = list.map(item => {
+              return item.title.indexOf(isSearched) !== -1
+              ? ({ ...item, isSearched: true }) 
+              : ({ ...item, isSearched: false }) 
+            })
+            setList(newList)
+            localStorage.setItem('savedList', JSON.stringify(newList));
+            }
+            }></IonSearchbar>
         </IonToolbar>
       </IonHeader>
 
       <IonContent>
-        {list.map((v : TodoItem, i: number) => (
+        {initList.map((v : TodoItem, i: number) => (
           <IonCard key={i}>
             <IonCardHeader>
               <IonItem>
                 <IonCheckbox checked={v.checked} onClick={() => { 
-                  console.log('check ion change')
-                  console.log(list)
                   const newList = list.map(item => {
                     return item.cardNum === v.cardNum
                     ? ({ ...item, checked: !v.checked }) 
@@ -54,7 +70,6 @@ const Tab1: React.FC = () => {
                 <IonCardTitle>{v.title}</IonCardTitle>
                 <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
                   const newList = list.filter((v, ii)=> ii !== i)
-                  console.log(newList)
                   setList(newList)
                   localStorage.setItem('savedList', JSON.stringify(newList));
                   }}>Del</IonButton>
@@ -79,15 +94,13 @@ const Tab1: React.FC = () => {
         <IonButton onClick={()=>{
           const cardNumList: number[] = [];
           let maxNum = 0
-          console.log(list)
           if(list.length !== 0) {
             list.forEach(Element => cardNumList.push(Element.cardNum))
             maxNum = Math.max.apply(null, cardNumList)+1
           }
-          const newList = [{cardNum: maxNum, title, content, checked: false}, ...list]
-          console.log(newList)
+          const newList = [{cardNum: maxNum, title, content, checked: false, isSearched : true}, ...list]
+          setSearchText("")
           setList(newList)
-          console.log('add c omplete')
           localStorage.setItem('savedList', JSON.stringify(newList));
         }}>추가</IonButton>
       </IonContent>

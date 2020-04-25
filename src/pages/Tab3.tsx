@@ -1,6 +1,6 @@
 //import React from 'react';
 //import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { IonTextarea, IonContent, IonHeader, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter } from '@ionic/react';
 import React, { useState } from 'react';
 import './Tab3.css';
 
@@ -11,57 +11,65 @@ const checkboxList = [
 ];
 
 const Tab3: React.FC = () => {
-
+  
+  const [searchText, setSearchText] = useState('');
   const [text, setText] = useState<string>();
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>TextArea Examples</IonTitle>
+          <IonTitle>IonSearchBar Examples</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonList>
-          <IonItemDivider>Default textarea</IonItemDivider>          
-          <IonItem>
-            <IonTextarea value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
-          </IonItem>
+        <p>Default Searchbar</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
 
-          <IonItemDivider>Textarea in an item with a placeholder</IonItemDivider>
-          <IonItem>
-            <IonTextarea placeholder="Enter more information here..." value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
-          </IonItem>
+        <p>Searchbar with cancel button always shown</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="always"></IonSearchbar>
 
-          <IonItemDivider>Textarea in an item with a floating label</IonItemDivider>
-          <IonItem>
-            <IonLabel position="floating">Description</IonLabel>
-            <IonTextarea value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
-          </IonItem>
+        <p>Searchbar with cancel button never shown</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="never"></IonSearchbar>
 
-          <IonItemDivider>Disabled and readonly textarea in an item with a stacked label</IonItemDivider>
-          <IonItem>
-            <IonLabel position="stacked">Summary</IonLabel>
-            <IonTextarea
-              disabled
-              readonly
-              value={text} onIonChange={e => setText(e.detail.value!)}>
-            </IonTextarea>
-          </IonItem>
+        <p>Searchbar with cancel button shown on focus</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="focus"></IonSearchbar>
 
-          <IonItemDivider>Textarea that clears the value on edit</IonItemDivider>
-          <IonItem>
-            <IonLabel>Comment</IonLabel>
-            <IonTextarea clearOnEdit={true} value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
-          </IonItem>
+        <p>Searchbar with danger color</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} color="danger"></IonSearchbar>
 
-          <IonItemDivider>Textarea with custom number of rows and cols</IonItemDivider>
-          <IonItem>
-            <IonLabel>Notes</IonLabel>
-            <IonTextarea rows={6} cols={20} placeholder="Enter any notes here..." value={text} onIonChange={e => setText(e.detail.value!)}></IonTextarea>
-          </IonItem>
-        </IonList>
+        <p>Searchbar with telephone type</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} type="tel"></IonSearchbar>
+
+        <p>Searchbar with numeric inputmode</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} inputmode="numeric"></IonSearchbar>
+
+        <p>Searchbar disabled </p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} disabled={true}></IonSearchbar>
+
+        <p>Searchbar with a cancel button and custom cancel button text</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="focus" cancelButtonText="Custom Cancel"></IonSearchbar>
+
+        <p>Searchbar with a custom debounce - Note: debounce only works on onIonChange event</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} debounce={1000}></IonSearchbar>
+
+        <p>Animated Searchbar</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} animated></IonSearchbar>
+
+        <p>Searchbar with a placeholder</p>
+        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} placeholder="Filter Schedules"></IonSearchbar>
+
+        <p>Searchbar in a Toolbar</p>
+        <IonToolbar>
+          <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
+        </IonToolbar>
+
       </IonContent>
+      <IonFooter>
+        <IonToolbar>
+          Search Text: {searchText ?? '(none)'}
+        </IonToolbar>
+      </IonFooter>
     </IonPage>
   );
 };

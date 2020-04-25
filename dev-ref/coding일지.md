@@ -316,3 +316,84 @@ localstorage 삭제해주는 것이라든지,
 코딩을 많이하고, 공부도 많이하면 괜찮아질 것 같다.
 ---
 
+2020/04/24
+
+- 검색 기능 추가하기.
+ion-searchbar 이용.
+
+단어입력 변화에 따라,
+하단의 카드들을 리렌더링 해줘야 하고,
+그것은 list의 title, content 두 항목이다.
+Search Text: {searchText ?? '(none)'}
+이것이 검색과 관련된 항목인 듯 하다.
+localstorage의 원본은 건드려서는 안된다.
+---
+docs의 ion-searchbar 가 있다.
+
+2020/04/25
+
+js string 검색이라고 치니까,
+indexOf, lastIndexOf 가 나오네..
+개발자 도구에 테스트.
+
+indexOf에 값이 없으면 -1이 return 됨.
+
+1. list 에 search 관련 property 를 넣을 것인가,
+
+2. 해당되는 것들만 newList에 담아서 List 변화없이 해줄 것인가.
+// setList에는 넣고, localstorage에만 저장 안하면 될라나.
+
+2번 안에 list.filter 함수를 사용해서 해보자.
+
+뭔가 캐스팅 같은 건 잘 안쓰나, 
+if문에서 걸러서 쓰려고 했는데 잘 안되네;;
+흠 타입스크립트라서 예전같이 편하게 안되네..
+indexOf 에는 string만 들어갈 수 있는데,
+해당 변수가 null or undefined를 가질 수 있어서 그런가봄.
+
+얼추 비슷하게 구현을 했는데,
+검색어 입력시 setList(newList)를 하면서 리렌더링이 되서
+검색어 입력 해놓았던 게 사라진다.
+
+흠..
+search 관련 property를 집어넣어야 하려나..
+그게 나을 것 같은 기분이 듬.
+대충 후려치기 사고 시뮬레이션을 했을 때
+
+1. 하단에 isSearched : false로 박아주고.
+
+2. 로컬스토리지 비워주고 새 양식으로 추가.
+
+3. 검색 조건에 해당된 리스트만 false 값으로 바꿔주기.
+
+4. 리스트에 담가주고, localstorage에도 변경값 저장.
+
+5. setSearchText(e.detail.value!) 통해서 검색어는 유지하도록 함.
+
+6. 렌더링할때 true인 값만 표시되도록 함.
+
+7. 추가시에 검색어에 ""로 비워주도록 함.
+
+====
+const newList = list.map(item => {
+    return item.title.indexOf(isSearched) !== -1
+    ? ({ ...item, isSearched: true }) 
+    : ({ ...item, isSearched: false }) 
+})
+기존의 삼항 연산자를 변형해서 삽입함.
+
+렌더링시 true인 값만 표기되도록 하려면,
+초기값을 true로 해야될 것 같음.
+=====
+얼추 구현하긴 했는데 코드가 더럽다.
+
+그리고 검색어 입력후 새로고침하면,
+검색어는 날아가는데 리스트는 고대로야..
+
+검색어 입력 상태에서
+하단에 추가를 누르면,
+검색어 날아가고 리스트 정상적으로 표기됨.
+추가시 true로 넣어주는 작업 때문에 그런듯.
+
+새로고침시 전부 true를 넣어주던가 뭐 다른 방법을 강구하던가 해야겠음.
+=====
