@@ -397,3 +397,4 @@ const newList = list.map(item => {
 
 새로고침시 전부 true를 넣어주던가 뭐 다른 방법을 강구하던가 해야겠음.
 =====
+테스트.
