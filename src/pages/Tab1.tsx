@@ -14,19 +14,19 @@ interface TodoItem {
 
 const Tab1: React.FC = () => {
   // react-hook
-
+  
   const [cardNum, setCardNum] = useState<number>(0);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [list, setList] = useState<TodoItem[]>(savedList);
   const [checked, setChecked] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
-
+  
   useEffect(() => {
-
+    
   }, [JSON.stringify(list)])
   const initList = list.filter((v, ii) => v.isSearched === true )
-
+  
   return (
     <IonPage>
       <IonHeader>
@@ -39,9 +39,8 @@ const Tab1: React.FC = () => {
               isSearched = e.detail.value;
             }
             setSearchText(e.detail.value!)
-            //const newList = list.filter((v, ii) => v.title.indexOf(isSearched) !== -1)
             const newList = list.map(item => {
-              return item.title.indexOf(isSearched) !== -1
+              return item.title.indexOf(isSearched) !== -1 || item.content.indexOf(isSearched) !== -1
               ? ({ ...item, isSearched: true }) 
               : ({ ...item, isSearched: false }) 
             })
@@ -51,7 +50,6 @@ const Tab1: React.FC = () => {
             }></IonSearchbar>
         </IonToolbar>
       </IonHeader>
-
       <IonContent>
         {initList.map((v : TodoItem, i: number) => (
           <IonCard key={i}>

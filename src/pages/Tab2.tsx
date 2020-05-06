@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./Tab1.css";
 
 const saved = localStorage.getItem('savedList') ?? JSON.stringify([]);
-console.log(saved)
 const savedList = JSON.parse(saved);
  
 interface TodoItem {
