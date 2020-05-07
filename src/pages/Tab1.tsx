@@ -21,12 +21,13 @@ const Tab1: React.FC = () => {
   const [list, setList] = useState<TodoItem[]>(savedList);
   const [checked, setChecked] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
-  
+
   useEffect(() => {
     
   }, [JSON.stringify(list)])
   const initList = list.filter((v, ii) => v.isSearched === true )
   
+
   return (
     <IonPage>
       <IonHeader>

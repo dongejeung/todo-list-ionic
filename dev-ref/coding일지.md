@@ -460,8 +460,6 @@ https://www.tutorialspoint.com/typescript/index.htm
 참조.
 ---
 
+2020/05/07
 
-
-
-=======
-테스트.
+어제 보던 typescript 기초 공부 이어서.

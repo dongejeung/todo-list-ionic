@@ -148,6 +148,35 @@ Type Assertion in TypeScript
 var str = '1' 
 var str2:number = <number> <any> str   //str is now of type number 
 console.log(typeof(str2))
-===
 
+=> 해당 예시는 에러가 남.
+일단 제너릭(<>) 형태에서는 에러가 나고,
+as를 사용해서 any 로 변환 하는 등으로는 사용이 되나,
+실제 타입 변경을 위해서는 아래와 같이 함수를 사용하거나 해야하는 듯.
+
+Number('1234')
+var y = String(1234)
+
+var x = "32";
+var y = +x; 
+===
+TypeScript Variable Scope
+
+- Global Scope
+
+- Class Scope
+
+- Local Scope
+=====
+연산자나 기본적인 것은 js 와 동일한 것들이 많아서 스킵.
+=====
+#Function
+
+function disp_details(id:number,name:string,mail_id?:string) { 
+   
+}
+
+=> 함수의 매개변수로 type을 지정해야 하는데,
+?를 붙일 경우 필수 매개변수가 아님. 
+옵션 변수는 끝쪽에 위치해야 함.
 
