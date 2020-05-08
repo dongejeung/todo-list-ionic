@@ -26,7 +26,6 @@ const Tab1: React.FC = () => {
     
   }, [JSON.stringify(list)])
   const initList = list.filter((v, ii) => v.isSearched === true )
-  
 
   return (
     <IonPage>

@@ -463,3 +463,8 @@ https://www.tutorialspoint.com/typescript/index.htm
 2020/05/07
 
 어제 보던 typescript 기초 공부 이어서.
+===
+2020/05/08
+
+어제 보던 typescript 기초 공부 이어서.
+
