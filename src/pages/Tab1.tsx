@@ -31,13 +31,13 @@ const Tab1: React.FC = () => {
         <IonToolbar>
           <IonTitle>To-do-list</IonTitle>
           <IonSearchbar value={searchText} onIonChange={e => {
-              
+              setSearchText(e.detail.value?? '')
             }
             }></IonSearchbar>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        {list.map((v : TodoItem, i: number) => (
+        {list.filter(v => v.title.indexOf(searchText) !== -1 || v.content.indexOf(searchText) !== -1).map((v : TodoItem, i: number) => (
           <IonCard key={i}>
             <IonCardHeader>
               <IonItem>
