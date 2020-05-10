@@ -1,76 +1,56 @@
 //import React from 'react';
 //import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Tab3.css';
+import axios from 'axios'
 
-const checkboxList = [
-  { val: 'Pepperoni', isChecked: true },
-  { val: 'Sausage', isChecked: false },
-  { val: 'Mushroom', isChecked: false }
-];
+
 
 const Tab3: React.FC = () => {
+  useEffect(() => {
+    axios.get('http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=96576bd59eb4e186492708c74321bf4f')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+  }, [])
   
-  const [searchText, setSearchText] = useState('');
-  const [text, setText] = useState<string>();
-
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>IonSearchBar Examples</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <p>Default Searchbar</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
-
-        <p>Searchbar with cancel button always shown</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="always"></IonSearchbar>
-
-        <p>Searchbar with cancel button never shown</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="never"></IonSearchbar>
-
-        <p>Searchbar with cancel button shown on focus</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="focus"></IonSearchbar>
-
-        <p>Searchbar with danger color</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} color="danger"></IonSearchbar>
-
-        <p>Searchbar with telephone type</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} type="tel"></IonSearchbar>
-
-        <p>Searchbar with numeric inputmode</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} inputmode="numeric"></IonSearchbar>
-
-        <p>Searchbar disabled </p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} disabled={true}></IonSearchbar>
-
-        <p>Searchbar with a cancel button and custom cancel button text</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} showCancelButton="focus" cancelButtonText="Custom Cancel"></IonSearchbar>
-
-        <p>Searchbar with a custom debounce - Note: debounce only works on onIonChange event</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} debounce={1000}></IonSearchbar>
-
-        <p>Animated Searchbar</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} animated></IonSearchbar>
-
-        <p>Searchbar with a placeholder</p>
-        <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)} placeholder="Filter Schedules"></IonSearchbar>
-
-        <p>Searchbar in a Toolbar</p>
-        <IonToolbar>
-          <IonSearchbar value={searchText} onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
-        </IonToolbar>
-
-      </IonContent>
-      <IonFooter>
-        <IonToolbar>
-          Search Text: {searchText ?? '(none)'}
-        </IonToolbar>
-      </IonFooter>
+      <div className="container">
+        <header>
+            <h1 className="center">기상예보 API(with flex)</h1>
+        </header>
+        <section className="content">
+            <nav>
+                <ul>
+                    <li>html</li>
+                    <li>css</li>
+                    <li>javascript</li>
+                </ul>
+            </nav>
+            <main>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim vero beatae fuga! Voluptate placeat saepe aut perspiciatis architecto? Eum, accusantium dolorem! Impedit voluptatum fugiat iure sed adipisci deserunt laborum. Repellat.
+            </main>
+            <aside>
+                AD
+            </aside>
+        </section>
+        <footer>
+            <a href="https://opentutorials.org/course/1">홈페이지</a>
+        </footer>
+    </div>
     </IonPage>
+
+    
   );
 };
 
