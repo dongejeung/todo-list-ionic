@@ -1,0 +1,47 @@
+.container{
+  display: flex;
+  flex-direction: column;
+}
+header{
+  border-bottom:1px solid gray;
+  padding-left:20px;
+}
+footer{
+  border-top:1px solid gray;
+  padding:20px;
+  text-align: center;
+}
+.content{
+  display:flex;
+}
+.content nav{
+  border-right:1px solid gray;
+}
+.content aside{
+  border-left:1px solid gray;    
+}
+nav, aside{
+  flex-grow: 1;
+  flex-basis: 150px;
+  flex-shrink: 0;
+}
+main{
+  display: flex;
+  flex-grow: 8;
+}
+main .item{
+  flex-grow: 1;
+  text-align: center;
+  border: 1px solid gray;
+}
+.center{
+  text-align: center;
+}
+IonIcon{
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 11pt;
+  padding: 0px 5px 0px 0px;
+}

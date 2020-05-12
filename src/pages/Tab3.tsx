@@ -2,6 +2,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, Ion
 import React, { useState, useEffect } from 'react';
 import './Tab3.css';
 import axios from 'axios'
+import { happy } from 'ionicons/icons';
 
 const Tab3: React.FC = () => {
   
@@ -49,6 +50,8 @@ const Tab3: React.FC = () => {
         </header>
         <section className="content">
             <nav>
+            <IonIcon icon={happy}></IonIcon>
+            <IonIcon name="rainy"></IonIcon>
                 <ul>
                     <li>html</li>
                     <li>css</li>
@@ -56,7 +59,7 @@ const Tab3: React.FC = () => {
                 </ul>
             </nav>
             <main>
-                <div className="item">월</div>
+                <div className="item">월<IonIcon name="rainy"></IonIcon></div>
                 <div className="item">화</div>
                 <div className="item">수</div>
                 <div className="item">목</div>
