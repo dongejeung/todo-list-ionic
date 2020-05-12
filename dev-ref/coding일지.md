@@ -481,3 +481,37 @@ flex 도입 중.
 아이콘 적용해서 바꾸게 해주지.
 
 ===
+
+2020/05/11
+
+- 위도 경도 가져오기.
+
+=> 코드를 베껴서 가져왔는데,
+브라우저에서 위치정보 접근 허용이라는 글씨가 뜬다.
+
+7일치 날씨 데이터를 리턴받으려고 하니까,
+api docs를 보니, 유료 계정에만 제공된다고 되있다.
+
+- js의 navigator.geolocation.getCurrentPosition
+을 통해 위도 경도 가져옴.
+// 함수의 인자 형태를 파악하고 싶었으나, 개발자도구에서는 못찾고,
+다른 코드 샘플이나, mozila 등의 docs에서 함수 형태의 인자들을 찾음.
+개발자도구상에서 리터럴로 입력시 native code 라고 나오고 그랬음.
+
+- useState를 통해 위경도 셋팅.
+// default는 서울의 위,경도값에 가까운 37, 126으로 셋팅.
+
+- api 쿼리문에 
+let position:string = "http://api.openweathermap.org/data/2.5/forecast/daily?lat=" + latitude + "&lon=" + longitude + "&cnt=" + cnt +"&appid=96576bd59eb4e186492708c74321bf4f"
+위, 경도 값이 number 아닌가 싶은 생각도 있고, typescript 라든지 뭐 걸리진 않을까 걱정했는데,
+그냥 string 형태로 인자삽입의 형태로 날라가서 리턴됨.
+
+로 api 사이트에 호출 보냄.
+===
++ 추가적으로 flex를 사용해 껍데기를 좀 다듬음.
+// 공간 디자인에 대한 친숙화 필요.
+
+===
+2020/05/12
+
+- Ion-icon 사용 해보는 중.

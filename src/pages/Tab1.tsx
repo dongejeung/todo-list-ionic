@@ -37,6 +37,7 @@ const Tab1: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
+        {/* 메서드 체인 사용. */}
         {list.filter(v => v.title.indexOf(searchText) !== -1 || v.content.indexOf(searchText) !== -1).map((v : TodoItem, i: number) => (
           <IonCard key={i}>
             <IonCardHeader>

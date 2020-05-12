@@ -1,15 +1,32 @@
-//import React from 'react';
-//import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSearchbar, IonFooter, IonIcon, IonImg} from '@ionic/react';
 import React, { useState, useEffect } from 'react';
 import './Tab3.css';
 import axios from 'axios'
 
-
-
 const Tab3: React.FC = () => {
+  
+  // getCurrentPosition함수의 인자, success, error function, option값.
+  navigator.geolocation.getCurrentPosition(function(position) {
+    setLatitude(position.coords.latitude)
+    setLongitude(position.coords.longitude)
+  }, function(error) {
+    console.error(error);
+  }, {
+    enableHighAccuracy: false,
+    maximumAge: 0,
+    timeout: Infinity
+  });
+
+  const [latitude, setLatitude] = useState(37);
+  const [longitude, setLongitude] = useState(126);
+  const cnt:number = 7;
+
+  let position:string = "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&cnt=" + cnt +"&appid=96576bd59eb4e186492708c74321bf4f"
+  console.log(position)
+
   useEffect(() => {
-    axios.get('http://api.openweathermap.org/data/2.5/weather?q=Seoul&appid=96576bd59eb4e186492708c74321bf4f')
+    // api 사용용 axios 라이브러리.
+    axios.get(position)
   .then(function (response) {
     // handle success
     console.log(response);
@@ -24,6 +41,7 @@ const Tab3: React.FC = () => {
   }, [])
   
   return (
+    
     <IonPage>
       <div className="container">
         <header>
@@ -38,7 +56,13 @@ const Tab3: React.FC = () => {
                 </ul>
             </nav>
             <main>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim vero beatae fuga! Voluptate placeat saepe aut perspiciatis architecto? Eum, accusantium dolorem! Impedit voluptatum fugiat iure sed adipisci deserunt laborum. Repellat.
+                <div className="item">월</div>
+                <div className="item">화</div>
+                <div className="item">수</div>
+                <div className="item">목</div>
+                <div className="item">금</div>
+                <div className="item">토</div>
+                <div className="item">일</div>
             </main>
             <aside>
                 AD

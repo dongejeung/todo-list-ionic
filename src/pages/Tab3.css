@@ -26,8 +26,22 @@ nav, aside{
   flex-shrink: 0;
 }
 main{
-  padding:10px;
+  display: flex;
+  flex-grow: 8;
+}
+main .item{
+  flex-grow: 1;
+  text-align: center;
+  border: 1px solid gray;
 }
 .center{
   text-align: center;
+}
+IonIcon{
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 11pt;
+  padding: 0px 5px 0px 0px;
 }
