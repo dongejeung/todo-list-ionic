@@ -4,12 +4,13 @@ import React, { useState } from 'react'
 import { onEnterPress } from '../hooks/use-enter'
 import { useStore } from '../hooks/use-store'
 import TodoItemClass from '../stores/example/todo-item-store'
+import { attachProps } from '@ionic/react/dist/types/components/utils'
 
 interface Props {
   todo: TodoItemClass
 }
 
-export const TodoItem = ({ todo }: Props) => {
+export const TodoItem = ({todo}: Props) => {
   const { todoList } = useStore()
   const [newText, setText] = useState('')
   const [isEditing, setEdit] = useState(false)

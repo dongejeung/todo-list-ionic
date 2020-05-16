@@ -515,3 +515,33 @@ let position:string = "http://api.openweathermap.org/data/2.5/forecast/daily?lat
 2020/05/12
 
 - Ion-icon 사용 해보는 중.
+
+2020/05/16
+
+- 준호코드 참고, 기존 todo-list 수정.
+
+===
+
+ # 코드 살펴보는 중.
+
+디렉터리 구조 파악.
+
+- components
+=> 버튼, div 등 부품들.
+
+- hooks
+=> 액션?에 따른 동작 방식 규정?
+
+- pages
+=> 실제 표시되는 페이지.
+
+- store
+=> DTO 와 유사하게 데이터를 담는 그릇.
+
+===
+
+tab1 => 준호 샘플코드 참조하여 수정.
+
+1. component 분리 따로 저장.
+
+2. store 

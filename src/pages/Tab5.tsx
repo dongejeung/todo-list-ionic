@@ -1,6 +1,6 @@
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCheckbox, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTextarea, IonTitle, IonToolbar, IonSearchbar } from "@ionic/react";
 import React, { useEffect, useState } from "react";
-import "./Tab1.css";
+import "./Tab5.css";
 
 // To-Do  store 를 정의하고 import 해야함.
 // import {TodoNew} from '../components/TodoNew'
@@ -15,7 +15,7 @@ interface TodoItem {
   checked: boolean;
 }
 
-const Tab1: React.FC = () => {
+const Tab5: React.FC = () => {
   // react-hook
   
   const [cardNum, setCardNum] = useState<number>(0);
@@ -97,4 +97,4 @@ const Tab1: React.FC = () => {
   );
 };
 
-export default Tab1;
+export default Tab5;
