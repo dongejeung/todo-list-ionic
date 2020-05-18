@@ -3,12 +3,12 @@ import { action, computed, observable } from 'mobx'
 import TodoItem from './todo-item-store'
 
 const initState = {
-  todos: ['안녕', '테스트버전', '독고다이'],
+  todos: ['안녕', '땀땀연구소', '함께 :)'],
 }
 
-export class TodoList {
+export class TodoCardList {
   @observable.shallow list: TodoItem[] = []
-  @observable query = ''
+  @observable query:string = ''
 
   constructor() {
     initState.todos.forEach(this.addTodo)

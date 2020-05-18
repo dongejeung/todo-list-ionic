@@ -545,3 +545,144 @@ tab1 => 준호 샘플코드 참조하여 수정.
 1. component 분리 따로 저장.
 
 2. store 
+
+===
+
+ 2020/05/17
+
+ 1. 새로 만든 tab5에서 localstorage 관련 코드 제거.
+
+ 2. atomic pattern(이라는데?)으로 component 최대한 작게 정의.
+ // 기존 tab1의 component들을 최대한 세세하게 쪼개보자.
+
+ - Title.
+ => 필요없음
+
+ - searchBar
+ => 필요없음
+
+ - card
+	- checkbox
+	- card-title
+	- card-content
+ 	- card-deleteButton
+ - inputBox(title, content)
+
+ - addButton
+
+ // 이미 Ion에서 태그로 제공해주고 있는 최소 단위들은 굳이 component 로 만들 필요 없는 듯.
+ => 이건 검토가 필요할 수도 있을 듯.
+
+ ref) 아토믹 패턴 관련 설명글.
+
+ https://tech.madup.com/atomic-design/ 
+
+ -----
+
+ 일단 atoms 껍데기라도 만들어보자.
+
+ // 처음부터 완벽을 추구하기보다는, 
+
+ 일단 만들고 수정하고, 수정하는 식으로..
+
+ 멍하니 비효율적으로 생각만 돌리게 된다.
+
+ -----
+
+ 일단 껍데기만 만들어서 tab1의 형태와 유사하게 만듬.
+
+ -----
+
+ 오늘은 여기서 종료할 것인데, 
+
+ 태그 사이에 value나 함수를 집어넣는 것 등이 어떻게 되는 지 궁금하다.
+
+ =======
+2020/05/18
+
+- 준호의 코드를 사용해서 코드를 작성하려고 하니까,
+기존 준호의 코드를 수정할 것인지..
+아님 복사해서 비슷한 패턴을 만들것인지 그런게 문제다.
+
+뭐는 그대로 쓰고 뭐는 새로 만들고,
+기준이 없다 보면 헷갈리기 쉬운 것 같다.
+기존 코드를 주석 처리하는 식으로 코드를 냅두고 수정하는 식으로 하자.
+
+- component 는 atomic pattern 으로 새로 생성하고,
+
+- hooks는 기존코드 주석처리 하고 수정.
+
+- stores도 기존코드 주석처리.
+
+// 사실상 hooks는 코딩내용이 별로 없다.
+하지만, 위와 같은 식으로 하려니까, tab4가 에러가 날 수 있을 것 같다..
+
+=====
+
+이제 구조가 좀 보인다.
+
+1. stores(news는 분석 제외.)
+
+1-1. todo-item..
+
+1-2. todo-list.. (1-1을 리스트화)
+
+1-3. inedex.ts (1-2를 RootStore 라는 형태로 export)
+
+2. hooks(use-enter.ts는 분석제외.)
+
+2-1 store-provider.ts 에서 RootStore를 import
+
+2-2 use-store 에서 RootStore를 import 
+- store-provider의 StoreContext를 import 해서 쓰기도 한다.
+
+3. component(에서 useStore, TodoItem 등을 사용한다.)
+
+3-1. TodoAdd
+
+3-2. TodoItem
+
+3-3. TodoList 
+
+
+대충 코드 분석은 되었는데..
+
+남의 코드라 그런지,
+
+왜캐 보기가 더럽냐..
+
+=======
+
+ 1. 일단 기존의 Tab1 의 Title, Content 등등을 
+ localstorage에 넣는 형태에서 변경.
+ Content를 빼는 등.
+
+ => 준호의 stores(DTO?)를 활용해서 하자.
+
+ ---
+
+ 일단 tab4와 거의 같은 형태로 만듬.
+
+ => TodoCardList.tsx를 만들어서,
+
+ 기존의 카드형 리스트로 만들어보자.
+
+ ---
+ 
+  TodoCardItem도 만들었음.
+
+ ㅇㅋ 여기까지.
+
+=======
+
+
+  
+
+
+  
+
+
+
+
+
+

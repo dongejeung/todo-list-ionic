@@ -1,75 +1,69 @@
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCheckbox, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTextarea, IonTitle, IonToolbar, IonSearchbar } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import "./Tab5.css";
+import { Searchbar } from "../components/atoms/Searchbar";
+import { Card } from "../components/atoms/Card";
+import { InputBox } from "../components/atoms/InputBox";
+import { AddButton } from "../components/atoms/AddButton";
 
 // To-Do  store 를 정의하고 import 해야함.
-// import {TodoNew} from '../components/TodoNew'
-// import {TodoList} from '../components/TodoList'
+import {TodoNew} from '../components/TodoNew'
+import {TodoList} from '../components/TodoList'
+import {TodoCardList} from '../components/TodoCardList'
 
-const saved = localStorage.getItem('savedList') ?? JSON.stringify([]);
-const savedList = JSON.parse(saved);
-interface TodoItem {
+/* interface TodoItem {
   cardNum: number;
   title: string;
   content: string;
   checked: boolean;
-}
+} */
 
 const Tab5: React.FC = () => {
   // react-hook
   
-  const [cardNum, setCardNum] = useState<number>(0);
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
-  const [list, setList] = useState<TodoItem[]>(savedList);
-  const [checked, setChecked] = useState<boolean>(false);
-  const [searchText, setSearchText] = useState("");
+  // const [cardNum, setCardNum] = useState<number>(0);
+  // const [title, setTitle] = useState<string>("");
+  // const [content, setContent] = useState<string>("");
+  // const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
-    
-  }, [JSON.stringify(list)])
+
+  }, )
+  // }, [JSON.stringify(list)])
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>To-do-list</IonTitle>
-          <IonSearchbar value={searchText} onIonChange={e => {
-              setSearchText(e.detail.value?? '')
-            }
-            }></IonSearchbar>
+          <Searchbar></Searchbar>
         </IonToolbar>
       </IonHeader>
+
       <IonContent>
-        {/* 메서드 체인 사용. */}
-        {list.filter(v => v.title.indexOf(searchText) !== -1 || v.content.indexOf(searchText) !== -1).map((v : TodoItem, i: number) => (
-          <IonCard key={i}>
+        {/* <Card></Card> */}
+        <TodoCardList></TodoCardList>
+        {/* <InputBox></InputBox> */}
+        <AddButton></AddButton>
+      </IonContent>
+
+      {/* <IonContent>
+
+          <IonCard>
             <IonCardHeader>
               <IonItem>
-                <IonCheckbox checked={v.checked} onClick={() => { 
-                  const newList = list.map(item => {
-                    return item.cardNum === v.cardNum
-                    ? ({ ...item, checked: !v.checked }) 
-                    : item
+                <IonCheckbox onClick={() => { 
 
-                  })
-                  setList(newList)
-                  localStorage.setItem('savedList', JSON.stringify(newList))
                 }} />
-                <IonCardTitle>{v.title}</IonCardTitle>
+                <IonCardTitle></IonCardTitle>
                 <IonButton fill="outline" slot="end" color="danger" onClick={()=>{ 
-                  const newList = list.filter((v, ii)=> ii !== i)
-                  setList(newList)
-                  localStorage.setItem('savedList', JSON.stringify(newList));
                   }}>Del</IonButton>
               </IonItem>
               <IonCardContent>
-                {v.content}
               </IonCardContent>
-            </IonCardHeader>
-            
+            </IonCardHeader>            
           </IonCard>
-        ))}
+
         <IonLabel>Type Title</IonLabel>
         <IonInput
           placeholder="Enter title"
@@ -81,18 +75,10 @@ const Tab5: React.FC = () => {
           onIonChange={e => setContent(e.detail.value?? '')}
         ></IonTextarea>
         <IonButton onClick={()=>{
-          const cardNumList: number[] = [];
-          let maxNum = 0
-          if(list.length !== 0) {
-            list.forEach(Element => cardNumList.push(Element.cardNum))
-            maxNum = Math.max.apply(null, cardNumList)+1
-          }
-          const newList = [{cardNum: maxNum, title, content, checked: false}, ...list]
-          setSearchText("")
-          setList(newList)
-          localStorage.setItem('savedList', JSON.stringify(newList));
+          
         }}>추가</IonButton>
-      </IonContent>
+      </IonContent> */}
+
     </IonPage>
   );
 };
