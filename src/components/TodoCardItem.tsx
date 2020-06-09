@@ -1,4 +1,4 @@
-import { IonInput } from '@ionic/react'
+import { IonInput, IonCard, IonCardHeader, IonItem, IonCheckbox, IonCardTitle, IonButton} from '@ionic/react'
 import React, { useState } from 'react'
 
 import { onEnterPress } from '../hooks/use-enter'
@@ -25,20 +25,39 @@ export const TodoCardItem = ({todo}: Props) => {
     <div>
       {isEditing ? (
         <div>
-          <IonInput
-            type='text'
-            placeholder='수정'
-            onKeyDown={onEnterPress(saveText)}
-            onIonChange={(e) => setText(e.detail.value ?? '')}
-          />
-          <button onClick={saveText}>save</button>
+          <IonCard>
+            <IonCardHeader>
+              <IonItem>
+                {console.log("todo.isDone" + todo.isDone + "\ntodo.toggleIsDone" + todo.toggleIsDone)}
+                <IonCheckbox checked={todo.isDone} onClick={todo.toggleIsDone}></IonCheckbox>
+                <IonCardTitle>
+                <IonInput
+                  type='text'
+                  placeholder={todo.text}
+                  onIonChange={(e) => setText(e.detail.value ?? '')}
+                />
+                </IonCardTitle>
+                <IonButton onClick={saveText}>save</IonButton>
+                <IonButton fill="outline" slot="end" color="danger" onClick={() => todoList.removeTodo(todo)}>X</IonButton>
+              </IonItem>                
+            </IonCardHeader>
+          </IonCard>
         </div>
       ) : (
         <div>
-          <span>{todo.text}</span>
-          <input type='checkbox' onChange={todo.toggleIsDone} defaultChecked={todo.isDone}></input>
-          <button onClick={() => setEdit(true)}>edit</button>
-          <button onClick={() => todoList.removeTodo(todo)}>X</button>
+          <IonCard>
+            <IonCardHeader>
+              <IonItem>
+                {console.log("todo.isDone" + todo.isDone + "\ntodo.toggleIsDone" + todo.toggleIsDone)}
+                <IonCheckbox checked={todo.isDone} onClick={todo.toggleIsDone}></IonCheckbox>
+                <IonCardTitle>
+                  {todo.text}
+                </IonCardTitle>
+                <IonButton onClick={() => setEdit(true)}>edit</IonButton>
+                <IonButton fill="outline" slot="end" color="danger" onClick={() => todoList.removeTodo(todo)}>X</IonButton>
+              </IonItem>                
+            </IonCardHeader>
+          </IonCard>
         </div>
       )}
     </div>

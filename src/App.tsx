@@ -16,6 +16,7 @@ import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 import Tab4 from './pages/Tab4';
 import Tab5 from './pages/Tab5';
+import Tab6 from './pages/Tab6';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -46,6 +47,7 @@ const App: React.FC = () => (
           <Route path="/tab3" component={Tab3} />
           <Route path="/tab4" component={Tab4} />
           <Route path="/tab5" component={Tab5} />
+          <Route path="/tab6" component={Tab6} />
           <Route path="/" render={() => <Redirect to="/tab1" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
@@ -66,6 +68,10 @@ const App: React.FC = () => (
             <IonLabel>Tab 4</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab5" href="/tab5">
+            <IonIcon icon={square} />
+            <IonLabel>Tab 5</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="tab6" href="/tab6">
             <IonIcon icon={square} />
             <IonLabel>Tab 5</IonLabel>
           </IonTabButton>
