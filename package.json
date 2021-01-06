@@ -30,7 +30,7 @@
     "@ionic/react-router": "^5.1.0",
     "@types/node": "^13.13.5",
     "@types/styled-components": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "ionicons": "^5.0.1",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^2.0.6",
